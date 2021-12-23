@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AdventureMaker.UserControls.NextRoomSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdventureMaker.UserControls"
+             xmlns:commands="clr-namespace:AdventureMaker.Commands"
+             mc:Ignorable="d"
+             x:Name="root">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="commands:CustomCommands.ClearComboBox" CanExecute="ClearComboBox_CanExecute" Executed="ClearComboBox_Executed" />
+    </UserControl.CommandBindings>
+    <WrapPanel DockPanel.Dock="Right"  HorizontalAlignment="Center">
+        <ComboBox Name="cmRoomSelect" ItemsSource="{Binding Rooms}" IsEnabled="{Binding Rooms.Count}" SelectedItem="{Binding SelectedRoom, FallbackValue=null, ElementName=root}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Path=RoomID}"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding Path=RoomName}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button IsEnabled="{Binding Rooms.Count}" Command="commands:CustomCommands.ClearComboBox" Content="clear"></Button>
+    </WrapPanel>
+</UserControl>
