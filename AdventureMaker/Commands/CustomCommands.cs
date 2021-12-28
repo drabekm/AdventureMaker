@@ -25,6 +25,24 @@ namespace AdventureMaker.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand AddItem = new RoutedUICommand
+			(
+				"AddItem",
+				"AddItem",
+				typeof(CustomCommands)
+			);
+
+		public static readonly RoutedUICommand RemoveItem = new RoutedUICommand
+			(
+				"RemoveItem",
+				"RemoveItem",
+				typeof(CustomCommands),
+				new InputGestureCollection()
+				{
+					new KeyGesture(Key.Delete)
+				}
+			);
+
 		public static readonly RoutedUICommand ClearComboBox = new RoutedUICommand
 			(
 				"ClearComboBox",

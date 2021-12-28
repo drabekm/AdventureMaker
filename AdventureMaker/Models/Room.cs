@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 
@@ -50,6 +51,20 @@ namespace AdventureMaker.Models
             {
                 _roomDescription = value;
                 OnPropertyChanged("RoomDescription");
+            }
+        }
+
+        private ObservableCollection<Item> _items;
+        public ObservableCollection<Item> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+                OnPropertyChanged("Items");
             }
         }
 

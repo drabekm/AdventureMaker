@@ -72,6 +72,46 @@ namespace AdventureMaker
             }
         }
 
+        private void AddItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            int newID = 1;
+            if (viewModel.Items != null && viewModel.Items.Any())
+            {
+                newID = viewModel.Items.LastOrDefault().ItemID + 1;
+            }
+            var newItem = new Item() { ItemDescription = "New description", ItemID = newID, ItemName = $"New item {newID}" };
+            viewModel.Items.Add(newItem);
+            viewModel.CurrentItem = newItem;
+        }
+
+        private void AddItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void RemoveItemCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (lbItems != null)
+            {
+                e.CanExecute = lbItems.SelectedItem != null;
+            }
+            else
+            {
+                e.CanExecute = false;
+            }
+        }
+
+        private void RemoveItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var selectedItem = lbItems.SelectedItem;
+            if (selectedItem != null && selectedItem is Item)
+            {
+                viewModel.Items 
+                    
+                     .Remove(selectedItem as Item);
+            }
+        }
+
         private void SaveGameCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = viewModel.Rooms.Any() || viewModel.Items.Any();

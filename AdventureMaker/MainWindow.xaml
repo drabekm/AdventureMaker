@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:AdventureMaker.UserControls"
         xmlns:local="clr-namespace:AdventureMaker"
-        xmlns:commands="clr-namespace:AdventureMaker.Commands" xmlns:viewmodels="clr-namespace:AdventureMaker.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RoomEditorViewModel}"
+        xmlns:commands="clr-namespace:AdventureMaker.Commands"
+        xmlns:viewmodels="clr-namespace:AdventureMaker.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:RoomEditorViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.CommandBindings>
         <CommandBinding Command="commands:CustomCommands.AddRoom" CanExecute="AddRoomCommand_CanExecute" Executed="AddRoomCommand_Executed" />
         <CommandBinding Command="commands:CustomCommands.RemoveRoom" CanExecute="RemoveRoomCommand_CanExecute" Executed="RemoveRoomCommand_Executed" />
+        <CommandBinding Command="commands:CustomCommands.AddItem" CanExecute="AddItemCommand_CanExecute" Executed="AddItemCommand_Executed" />
+        <CommandBinding Command="commands:CustomCommands.RemoveItem" CanExecute="RemoveItemCommand_CanExecute" Executed="RemoveItemCommand_Executed" />
         <CommandBinding Command="commands:CustomCommands.SaveGame" CanExecute="SaveGameCommand_CanExecute" Executed="SaveGameCommand_Executed" />
         <CommandBinding Command="commands:CustomCommands.LoadGame" CanExecute="LoadGameCommand_CanExecute" Executed="LoadGameCommand_Executed" />
     </Window.CommandBindings>
@@ -72,8 +76,8 @@
 
         <DockPanel Visibility="{Binding IsItemsEditorOpen, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">
             <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center"  DockPanel.Dock="Top" >
-                <Button Name="btnAddItem" Content="_Add item" FontSize="16" Margin="0 0 5 0"  Command="commands:CustomCommands.AddRoom"/>
-                <Button Name="btnRemoveItem"  Content="_Remove item" FontSize="16" Margin="5 0 0 0" Command="commands:CustomCommands.RemoveRoom"/>
+                <Button Name="btnAddItem" Content="_Add item" FontSize="16" Margin="0 0 5 0"  Command="commands:CustomCommands.AddItem"/>
+                <Button Name="btnRemoveItem"  Content="_Remove item" FontSize="16" Margin="5 0 0 0" Command="commands:CustomCommands.RemoveItem"/>
             </StackPanel>
             <ListBox  x:Name="lbItems" ItemsSource="{Binding Items}"  DockPanel.Dock="Bottom">
                 <ListBox.ItemTemplate>
@@ -97,20 +101,7 @@
                     <uc:RoomEditor/>
                 </TabItem>
                 <TabItem Header="Items" Selector.IsSelected="{Binding IsItemsEditorOpen}">
-                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                        <WrapPanel>
-                            <TextBlock Text="Item id:" Margin="0 0 10 0"/>
-                            <TextBlock Text="{Binding CurrentItem.ItemID}"/>
-                        </WrapPanel>
-                        <WrapPanel>
-                            <TextBlock Text="Item name:" Margin="0 0 10 0"/>
-                            <TextBox x:Name="txtItemName" Text="{Binding CurrentItem.ItemName, UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
-                        </WrapPanel>
-                        <StackPanel>
-                            <TextBlock Text="Item description: " />
-                            <TextBox x:Name="txtItemDescription" AcceptsReturn="True" Text="{Binding CurrentItem.ItemDescription, UpdateSourceTrigger=PropertyChanged}" Height="70" />
-                        </StackPanel>
-                    </StackPanel>
+                    <uc:ItemEditor/>
                 </TabItem>
                 <TabItem Header="NPCs" Selector.IsSelected="{Binding IsNPCsEditorOpen}"/>
             </TabControl>

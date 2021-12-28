@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:uc="clr-namespace:AdventureMaker.UserControls"
+             xmlns:commands="clr-namespace:AdventureMaker.Commands"
              mc:Ignorable="d">
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <WrapPanel>
@@ -40,5 +41,14 @@
                 <TextBlock Text=" East room"/>
             </WrapPanel>
         </DockPanel>
+        <StackPanel HorizontalAlignment="Left">
+            <WrapPanel>
+                <Button Content="Add item"  Command="commands:CustomCommands.AddItem"/>
+                <Button Content="Remove item"  Command="commands:CustomCommands.RemoveItem"/>
+            </WrapPanel>
+            <ListBox ItemsSource="{Binding CurrentRoom.Items}">
+                
+            </ListBox>
+        </StackPanel>
     </StackPanel>
 </UserControl>
