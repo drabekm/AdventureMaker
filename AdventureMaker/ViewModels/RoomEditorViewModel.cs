@@ -1,14 +1,17 @@
-﻿using AdventureMaker.Models;
+﻿using AdventureCore.ViewModels.Models;
+using AdventureMaker.Commands;
+using AdventureMaker.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace AdventureMaker.ViewModels
 {
-    public class RoomEditorViewModel : BaseNotifiableModel
+    public class RoomEditorViewModel : BaseViewModel
     {        
         private ObservableCollection<Room> _rooms { get; set; }
         [JsonProperty("rooms")]
@@ -94,11 +97,15 @@ namespace AdventureMaker.ViewModels
             }
         }
 
+        public ICommand AddRoomCommand { get; set; }
+
         public RoomEditorViewModel()
         {
             _isRoomEditorOpen = true;
             _rooms = new ObservableCollection<Room>();
             _items = new ObservableCollection<Item>();
+
+            AddRoomCommand = new AddRoomCommand();
         }
     }
 }

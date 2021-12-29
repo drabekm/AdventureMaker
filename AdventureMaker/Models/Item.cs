@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AdventureCore.ViewModels.Models;
 
 namespace AdventureMaker.Models
 {
-    public class Item : BaseNotifiableModel
+    public class Item : BaseViewModel
     {
         private int _itemID;
         public int ItemID

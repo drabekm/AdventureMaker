@@ -7,8 +7,13 @@ using System.Text;
 
 namespace AdventureMaker.Models
 {
-    public class Room : BaseNotifiableModel
+    public class Room/* : BaseNotifiableModel*/
     {
+        public void OnPropertyChanged(string test)
+        {
+
+        }
+
         private int _roomID;
         [JsonProperty("roomID")]
         public int RoomID

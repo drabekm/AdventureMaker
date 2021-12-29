@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.CommandBindings>
-        <CommandBinding Command="commands:CustomCommands.AddRoom" CanExecute="AddRoomCommand_CanExecute" Executed="AddRoomCommand_Executed" />
+        <!--<CommandBinding Command="commands:CustomCommands.AddRoom" CanExecute="AddRoomCommand_CanExecute" Executed="AddRoomCommand_Executed" />-->
         <CommandBinding Command="commands:CustomCommands.RemoveRoom" CanExecute="RemoveRoomCommand_CanExecute" Executed="RemoveRoomCommand_Executed" />
         <CommandBinding Command="commands:CustomCommands.AddItem" CanExecute="AddItemCommand_CanExecute" Executed="AddItemCommand_Executed" />
         <CommandBinding Command="commands:CustomCommands.RemoveItem" CanExecute="RemoveItemCommand_CanExecute" Executed="RemoveItemCommand_Executed" />
@@ -57,7 +57,7 @@
         <!-- Left pannel-->
         <DockPanel Visibility="{Binding IsRoomEditorOpen, Converter={StaticResource BoolToVisibility},FallbackValue=Visible}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">
             <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center"  DockPanel.Dock="Top" >
-                <Button Name="btnAddRoom" Content="_Add room" FontSize="16" Margin="0 0 5 0"  Command="commands:CustomCommands.AddRoom"/>
+                <Button Name="btnAddRoom" Content="_Add room" FontSize="16" Margin="0 0 5 0"  Command="{Binding AddRoomCommand}" CommandParameter="{Binding}"/>
                 <Button Name="btnRemoveRoom"  Content="_Remove room" FontSize="16" Margin="5 0 0 0" Command="commands:CustomCommands.RemoveRoom"/>
             </StackPanel>
             <ListBox x:Name="lbRooms" ItemsSource="{Binding Rooms}" SelectionChanged="lbRooms_SelectionChanged" DockPanel.Dock="Bottom">
@@ -71,7 +71,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            
+
         </DockPanel>
 
         <DockPanel Visibility="{Binding IsItemsEditorOpen, Converter={StaticResource BoolToVisibility}, FallbackValue=Hidden}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">

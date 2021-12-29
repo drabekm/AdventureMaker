@@ -34,22 +34,22 @@ namespace AdventureMaker
             this.DataContext = viewModel;
         }
 
-        private void AddRoomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
+        //private void AddRoomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        //{
+        //    e.CanExecute = true;
+        //}
 
-        private void AddRoomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            int newID = 1;
-            if (viewModel.Rooms != null && viewModel.Rooms.Any())
-            {
-                newID = viewModel.Rooms.LastOrDefault().RoomID + 1;
-            }
-            var newRoom = new Room() { RoomDescription = "New description", RoomID = newID, RoomName = $"New room {newID}" };
-            viewModel.Rooms.Add(newRoom);
-            viewModel.CurrentRoom = newRoom;
-        }
+        //private void AddRoomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    int newID = 1;
+        //    if (viewModel.Rooms != null && viewModel.Rooms.Any())
+        //    {
+        //        newID = viewModel.Rooms.LastOrDefault().RoomID + 1;
+        //    }
+        //    var newRoom = new Room() { RoomDescription = "New description", RoomID = newID, RoomName = $"New room {newID}" };
+        //    viewModel.Rooms.Add(newRoom);
+        //    viewModel.CurrentRoom = newRoom;
+        //}
 
         private void RemoveRoomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
