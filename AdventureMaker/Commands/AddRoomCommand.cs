@@ -1,37 +1,36 @@
-﻿using AdventureMaker.Models;
+﻿using AdventureCore.Commands;
+using AdventureCore.Models;
 using AdventureMaker.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace AdventureMaker.Commands
 {
-    internal class AddRoomCommand : ICommand
+    internal class AddRoomCommand : BaseCommand
     {
-        public event EventHandler CanExecuteChanged;
+        private RoomEditorViewModel _viewmodel;
 
-        public bool CanExecute(object parameter)
+        public AddRoomCommand(RoomEditorViewModel viewmodel)
+        {
+            _viewmodel = viewmodel;
+        }
+
+        public override bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public override void Execute(object parameter)
         {
-            RoomEditorViewModel viewmodel = parameter as RoomEditorViewModel;
-            if (viewmodel != null)
+            int newID = 1;
+            if (_viewmodel.Rooms.Any())
             {
-                int newID = 1;
-                if (viewmodel.Rooms.Any())
-                {
-                    newID = viewmodel.Rooms.LastOrDefault().RoomID + 1;
-                }
-                var newRoom = new Room() { RoomDescription = "New description", RoomID = newID, RoomName = $"New room {newID}" };
-                viewmodel.Rooms.Add(newRoom);
-                viewmodel.CurrentRoom = newRoom;
+                newID = _viewmodel.Rooms.LastOrDefault().RoomID + 1;
             }
+            var newRoom = new Room() { RoomDescription = "New description", RoomID = newID, RoomName = $"New room {newID}" };
+            _viewmodel.Rooms.Add(newRoom);
+            _viewmodel.CurrentRoom = newRoom;
         }
     }
 }

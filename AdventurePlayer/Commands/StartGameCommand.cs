@@ -15,12 +15,12 @@ namespace AdventurePlayer.Commands
 
         }
 
-        public bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             _navigationHelper.CurrentViewModel = new GameViewModel(_navigationHelper);
         }

@@ -13,8 +13,10 @@ namespace AdventurePlayer.ViewModels
         public MainMenuViewModel(NavigationHelper navigationHelper)
         {
             StartGameCommand = new StartGameCommand(navigationHelper);
+            CloseProgramCommand = new CloseProgramCommand();
         }
 
         public ICommand StartGameCommand { get; }
+        public ICommand CloseProgramCommand { get; }
     }
 }

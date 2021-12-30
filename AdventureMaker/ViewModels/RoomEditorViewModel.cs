@@ -1,12 +1,8 @@
-﻿using AdventureCore.ViewModels.Models;
+﻿using AdventureCore.Models;
+using AdventureCore.ViewModels.Models;
 using AdventureMaker.Commands;
-using AdventureMaker.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AdventureMaker.ViewModels
@@ -97,7 +93,10 @@ namespace AdventureMaker.ViewModels
             }
         }
 
-        public ICommand AddRoomCommand { get; set; }
+        public ICommand AddRoomCommand { get; }
+        public ICommand RemoveRoomCommand { get; }
+        public ICommand SaveGameCommand { get; }
+        public ICommand LoadGameCommand { get; }
 
         public RoomEditorViewModel()
         {
@@ -105,7 +104,25 @@ namespace AdventureMaker.ViewModels
             _rooms = new ObservableCollection<Room>();
             _items = new ObservableCollection<Item>();
 
-            AddRoomCommand = new AddRoomCommand();
+            AddRoomCommand = new AddRoomCommand(this);
+            RemoveRoomCommand = new RemoveRoomCommand(this);
+            LoadGameCommand = new LoadGameCommand(this);
+            SaveGameCommand = new SaveGameCommand(this);
+
+            Rooms.CollectionChanged += Rooms_CollectionChanged;
+            Items.CollectionChanged += Items_CollectionChanged;
         }
+
+        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Items));
+        }
+
+        private void Rooms_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Rooms));
+        }
+
+
     }
 }

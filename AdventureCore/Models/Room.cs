@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
 
-namespace AdventureMaker.Models
+namespace AdventureCore.Models
 {
-    public class Room/* : BaseNotifiableModel*/
+    public class Room
     {
         public void OnPropertyChanged(string test)
         {

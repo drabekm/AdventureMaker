@@ -1,5 +1,5 @@
-﻿using AdventureMaker.Helpers;
-using AdventureMaker.Models;
+﻿using AdventureCore.Models;
+using AdventureMaker.Helpers;
 using AdventureMaker.ViewModels;
 using Microsoft.Win32;
 using System;
@@ -32,44 +32,6 @@ namespace AdventureMaker
             InitializeComponent();
             viewModel = new RoomEditorViewModel();
             this.DataContext = viewModel;
-        }
-
-        //private void AddRoomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        //{
-        //    e.CanExecute = true;
-        //}
-
-        //private void AddRoomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    int newID = 1;
-        //    if (viewModel.Rooms != null && viewModel.Rooms.Any())
-        //    {
-        //        newID = viewModel.Rooms.LastOrDefault().RoomID + 1;
-        //    }
-        //    var newRoom = new Room() { RoomDescription = "New description", RoomID = newID, RoomName = $"New room {newID}" };
-        //    viewModel.Rooms.Add(newRoom);
-        //    viewModel.CurrentRoom = newRoom;
-        //}
-
-        private void RemoveRoomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (lbRooms != null)
-            {
-                e.CanExecute = lbRooms.SelectedItem != null;
-            }
-            else
-            {
-                e.CanExecute = false;
-            }
-        }
-
-        private void RemoveRoomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var selectedRoom = lbRooms.SelectedItem;
-            if (selectedRoom != null && selectedRoom is Room)
-            {
-                viewModel.Rooms.Remove(selectedRoom as Room);
-            }
         }
 
         private void AddItemCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -109,35 +71,6 @@ namespace AdventureMaker
                 viewModel.Items 
                     
                      .Remove(selectedItem as Item);
-            }
-        }
-
-        private void SaveGameCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = viewModel.Rooms.Any() || viewModel.Items.Any();
-        }
-
-        private void SaveGameCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var saveFileDialog = FileHelper.GetSaveGameFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                FileHelper.SaveRoomEditorViewModelData(this.viewModel, saveFileDialog.FileName);
-            }
-        }
-
-        private void LoadGameCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void LoadGameCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var loadFileDialog = FileHelper.GetLoadGameFileDialog();
-            if (loadFileDialog.ShowDialog() == true)
-            {
-                FileHelper.LoadRoomEditorViewModelData(this.viewModel, loadFileDialog.FileName);
-                
             }
         }
 

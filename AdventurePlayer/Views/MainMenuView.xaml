@@ -6,7 +6,38 @@
              xmlns:local="clr-namespace:AdventurePlayer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Main menu</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label 
+            Grid.Column="1"
+            Grid.Row="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="32">
+            Neurons adventure player
+        </Label>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch">
+            <Button Content="Load new game" Command="{Binding StartGameCommand}" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Continue save game" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Settings" Style="{StaticResource MenuButtonStyle}"/>
+            <Button Content="Quit" Command="{Binding CloseProgramCommand}" Style="{StaticResource MenuButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
